@@ -19,7 +19,7 @@ public class Main {
 
         char str[] = scanner.nextLine().toCharArray();
         int Res = parse(str);
-        
+
         System.out.println(Res);
     }
 }
