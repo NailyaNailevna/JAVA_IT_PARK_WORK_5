@@ -1,8 +1,5 @@
 package com.company;
 
-/**
- * Created by nailya.shakirova on 06.04.2018.
- */
 public class RationalNumber {
     private int dividend;
     private int divider;
@@ -15,7 +12,7 @@ public class RationalNumber {
     public RationalNumber (int dividend, int divider) {
         this.dividend = dividend;
         if (divider == 0) {
-           this.divider = 1;
+            this.divider = 1;
         }
         else {
             this.divider = divider;
