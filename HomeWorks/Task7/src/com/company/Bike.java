@@ -8,7 +8,7 @@ public class Bike extends Transport {
     private double oilAmount;
 
     public Bike(String model, double fuelConsumption,
-                int parameter,
+                double parameter,
                 double oilConsuption) {
         super(model, fuelConsumption,parameter);
         this.oilConsuption = oilConsuption;

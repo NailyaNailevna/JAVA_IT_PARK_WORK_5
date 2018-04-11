@@ -8,7 +8,7 @@ public class Tank extends Transport {
     private int target;
 
     public Tank (String model, double fuelConsumption,
-                 int parameter) {
+                 double parameter) {
         super(model, fuelConsumption,parameter);
         //this.ammunition = ammunition;
     }

@@ -8,9 +8,9 @@ public class Transport {
     protected int mileage;
     protected double fuelConsumption;
     protected double fuelAmount;
-    protected int parameter;
+    protected double parameter;
 
-    public Transport(String model, double fuelConsumption, int parameter) {
+    public Transport(String model, double fuelConsumption, double parameter) {
         this.model = model;
         this.mileage = 0;
         this.fuelConsumption = fuelConsumption;
@@ -34,7 +34,7 @@ public class Transport {
         return fuelAmount;
     }
 
-    public int getParameter() {
+    public double getParameter() {
         return parameter;
     }
 
