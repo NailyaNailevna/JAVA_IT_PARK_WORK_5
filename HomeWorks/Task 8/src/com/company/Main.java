@@ -15,9 +15,11 @@ public class Main {
         Ellipse ellipse = new Ellipse("Эллипс", 3, 4);
         System.out.println(ellipse.getFigure() + " с осями: " + ellipse.r + ", " + ellipse.width + ", площадь = " + ellipse.area());
 
+        Triangle triangle = new Triangle("Треугольник",3,4);
+        System.out.println(triangle.getFigure() + " с основанием: " + triangle.side + ", высотой: " + triangle.width + ", площадь = " + triangle.area());
 
 
-    Circle figurs[] = {cirkle, square, rectangle, ellipse};
+        Circle figurs[] = {cirkle, square, rectangle, ellipse,triangle};
 
         for (Circle figur : figurs) {
             System.out.println(figur.area());
