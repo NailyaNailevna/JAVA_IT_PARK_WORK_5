@@ -8,7 +8,7 @@ public interface UsersRepository {
     User find(int id);
     void delete(int id);
 
-    int getNewUserId();
+//    int getNewUserId();
 
     /**
      * Пусть в файле есть запись

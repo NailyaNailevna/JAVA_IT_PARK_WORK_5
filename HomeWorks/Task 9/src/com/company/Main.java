@@ -24,7 +24,10 @@ public class Main {
         System.out.println("Ищем юзера с айди 5");
         User findUser = usersRepository.find(5);
         System.out.println("Найденный юзер:");
-        System.out.println(findUser.getId() + " " + findUser.getFirstName() + " " + findUser.getLastName() + " " + findUser.getBirthDate());
+        System.out.println(/*findUser.getId() + " " + */findUser.getFirstName() + " " + findUser.getLastName() + " " + findUser.getBirthDate());
+
+        // удаляем юзера по id
+        //usersRepository.delete(6);
 
         // update - меняем юзера
         usersRepository.update(
