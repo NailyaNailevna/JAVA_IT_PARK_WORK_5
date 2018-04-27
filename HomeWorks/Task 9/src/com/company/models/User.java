@@ -9,7 +9,6 @@ public class User {
     private LocalDate birthDate;
 
     public User(int id, String firstName, String lastName, LocalDate birthDate) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -29,5 +28,21 @@ public class User {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 }
