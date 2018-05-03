@@ -27,14 +27,16 @@ public class Main {
         System.out.println(/*findUser.getId() + " " + */findUser.getFirstName() + " " + findUser.getLastName() + " " + findUser.getBirthDate());
 
         // удаляем юзера по id
-        //usersRepository.delete(6);
+        usersRepository.delete(6);
 
         // update - меняем юзера
-        usersRepository.update(
+        User updUser =
                 new User( 3,
-                          "Сергей", "Руденко",
-                          LocalDate.of(1994, 02, 02)
-                        )
-        );
+                        "Сергей", "Руденко",
+                        LocalDate.of(1994, 02, 02)
+                );
+        updUser.setId(3);
+        usersRepository.update(updUser);
+
     }
 }

@@ -20,10 +20,7 @@ public class UsersRepositoryFileWriterImpl implements UsersRepository {
     private String fileName;
     private IdGenerator idGenerator;
     private Scanner scanner;
-/*
-    private FileWriter writer2;
-    private Scanner scanner2;
-*/
+
     public UsersRepositoryFileWriterImpl(String fileName, IdGenerator idGenerator) {
         this.fileName = fileName;
         this.idGenerator = idGenerator;
@@ -87,32 +84,18 @@ public class UsersRepositoryFileWriterImpl implements UsersRepository {
                     writer.write(tempstr + "\n");
                 }
             }
-//            scanner.remove();
             scanner.close();
             writer.close();
 
-/*            sourceFile.canRead();
-            sourceFile.canWrite();
-            sourceFile.canExecute();
-
-            if(sourceFile.delete()) {
-                System.out.println("Файл удален");
-            } else {
-                System.out.println("Файл удалить не получилось");
-            }
-*/
-//                sourceFile.delete();
             writer = new FileWriter(sourceFile);
-            writer.close();
-            writer = new FileWriter(sourceFile,true);
 
             scanner = new Scanner(outputFile);
             while (scanner.hasNext()){
-                String tempstr = scanner.nextLine();
-                writer.write(tempstr + "\n");
+                writer.write(scanner.nextLine() + "\n");
             }
+            scanner.close();
+            writer.close();
             System.out.println("Запись удалена");
-//        outputFile.renameTo(sourceFile);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
@@ -138,14 +121,11 @@ public class UsersRepositoryFileWriterImpl implements UsersRepository {
             }
             scanner.close();
             writer.close();
-            //sourceFile.delete();
-            //outputFile.renameTo(sourceFile);
 
             writer = new FileWriter(sourceFile);
-//            writer2.flush();
             scanner = new Scanner(outputFile);
             while (scanner.hasNext()) {
-                writer.write(scanner.nextLine());
+                writer.write(scanner.nextLine() + "\n");
             }
             scanner.close();
             writer.close();
