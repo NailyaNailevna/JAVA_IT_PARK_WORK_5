@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.md_diagnosis")
+@Table(name="md_diagnosis", schema="public")
 public class DiagnosisEntity {
 
     @Id
@@ -52,4 +52,8 @@ public class DiagnosisEntity {
     @Column(name ="to_dt")
     @Temporal(TemporalType.DATE)
     private Date toDt;
+
+    public DiagnosisEntity(Integer id) {
+        this.id = id;
+    }
 }

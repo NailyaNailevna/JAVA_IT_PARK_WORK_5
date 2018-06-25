@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.pim_department")
+@Table(name="pim_department", schema="public")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class DepartmentEntity {
 //    public static final int DEP_KIND_ID = 1;

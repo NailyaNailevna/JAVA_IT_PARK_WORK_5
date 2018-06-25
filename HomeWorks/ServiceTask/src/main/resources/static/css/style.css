@@ -80,7 +80,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
 
 body {
-    background-color: #3e94ec;
+    background-color: #f7f7f7;
     font-family: "Roboto", helvetica, arial, sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -106,7 +106,7 @@ div.table-title {
 }
 
 
-/*** Table Styles **/
+/*** Table Styles
 
 .table-fill {
     background: white;
@@ -219,4 +219,47 @@ td.text-center {
 
 td.text-right {
     text-align: right;
+}
+**/
+
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-radius: 10px;
+    border-spacing: 0;
+    text-align: center;
+}
+th {
+    background: #BCEBDD;
+    color: #6d6767;
+    text-shadow: 0 1px 1px #2D2020;
+    padding: 10px 20px;
+}
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+th:first-child, td:first-child {
+    text-align: left;
+}
+th:first-child {
+    border-top-left-radius: 10px;
+}
+th:last-child {
+    border-top-right-radius: 10px;
+    border-right: none;
+}
+td {
+    padding: 10px 20px;
+    background: #f8e39136;
+}
+tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+tr td:last-child {
+    border-right: none;
 }

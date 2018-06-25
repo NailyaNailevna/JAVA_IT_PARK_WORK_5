@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.pim_individual")
+@Table(name="pim_individual", schema="public")
 public class IndividualEntity {
 
     @Id
@@ -41,6 +41,28 @@ public class IndividualEntity {
 
     public IndividualEntity(Integer id) {
         this.id = id;
+    }
+
+    public String getFio() {
+        StringBuilder builder = getFullNameBuilder();
+        return builder.toString();
+    }
+
+    public StringBuilder getFullNameBuilder() {
+        StringBuilder builder = new StringBuilder();
+        if (surname != null)
+            builder.append(surname);
+        if (name != null) {
+            if (surname != null)
+                builder.append(" ");
+            builder.append(name);
+        }
+        if (patrName != null) {
+            if (surname != null || name != null)
+                builder.append(" ");
+            builder.append(patrName);
+        }
+        return builder;
     }
 
 }

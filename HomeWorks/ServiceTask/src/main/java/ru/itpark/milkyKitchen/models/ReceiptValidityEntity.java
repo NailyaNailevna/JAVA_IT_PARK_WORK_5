@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.md_receipt_validity")
+@Table(name="md_receipt_validity", schema="public")
 public class ReceiptValidityEntity {
 
     @Id
@@ -45,4 +45,8 @@ public class ReceiptValidityEntity {
     @Column(name ="to_dt")
     @Temporal(TemporalType.DATE)
     private Date toDt;
+
+    public ReceiptValidityEntity(Integer id) {
+        this.id = id;
+    }
 }

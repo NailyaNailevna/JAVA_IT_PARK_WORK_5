@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.pim_department_kind")
+@Table(name="pim_department_kind", schema="public")
 public class DepartmentKindEntity {
 
     @Id

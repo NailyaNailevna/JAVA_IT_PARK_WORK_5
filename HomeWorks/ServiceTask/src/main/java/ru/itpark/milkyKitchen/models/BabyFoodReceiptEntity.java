@@ -1,7 +1,6 @@
 package ru.itpark.milkyKitchen.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,20 +12,50 @@ import java.util.Date;
 @Data
 //@NoArgsConstructor
 @AllArgsConstructor
-//@Builder
+@Builder()
+@Getter
+@Setter
 @Entity
 //@EqualsAndHashCode(callSuper = true,of = {"id"})
 //@EqualsAndHashCode(callSuper = false, of = {"id"})
-@Table(name="ehr.baby_food_receipt")
+@Table(name="baby_food_receipt", schema="ehr")
 //@PrimaryKeyJoinColumn(name = "ID")
-/*
+
+@SqlResultSetMappings({
+        @SqlResultSetMapping(
+                name = "babyFoodReceiptMapping",
+                classes = @ConstructorResult(targetClass = BabyFoodReceiptEntity.class,
+                        columns = {@ColumnResult(name = "id", type = Integer.class),
+                                @ColumnResult(name = "series", type = String.class),
+                                @ColumnResult(name = "num", type = String.class),
+                                @ColumnResult(name = "issueDt", type = Date.class),
+                                @ColumnResult(name = "beginDate", type = Date.class),
+                                @ColumnResult(name = "endDate", type = Date.class),
+                                @ColumnResult(name = "patientId", type = Integer.class),
+                                @ColumnResult(name = "ageCategoryId", type = Integer.class),
+                                @ColumnResult(name = "benefitDefinitionId", type = Integer.class),
+                                @ColumnResult(name = "diagnosisId", type = Integer.class),
+                                @ColumnResult(name = "kitchenId", type = Integer.class),
+                                @ColumnResult(name = "clinicId", type = Integer.class),
+                                @ColumnResult(name = "emplPosId", type = Integer.class)
+                })),
+/*        ,
+        @SqlResultSetMapping(
+                name = "classroomMappingWithCenterName",
+                classes = @ConstructorResult(targetClass = Classroom.class,
+                        columns = {@ColumnResult(name = "id", type = Long.class),
+                                @ColumnResult(name = "class_title", type = String.class),
+                                @ColumnResult(name = "lessons_count", type = Integer.class),
+                                @ColumnResult(name = "center_name", type = String.class)})),*/
+                      }
+)
+
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries(value = {
-        @NamedQuery(
-                name = "BabyFoodReceiptEntity.findReceiptById",
-                query = "SELECT bfr " +
-                        "FROM BabyFoodReceiptEntity bfr " +
-                        "JOIN bfr.ReceiptEntity r " +
+@NamedNativeQueries( {
+        @NamedNativeQuery(name = "BabyFoodReceiptEntity.findReceiptById",
+                query = "SELECT * " +
+                        "FROM BabyFoodReceiptEntity bfr\n " +
+                        "JOIN bfr.ReceiptEntity r\n " +
 //                    "FROM receipt.receipt r " +
 //                    "JOIN receipt.baby_food_receipt bfr on bfr.id = r.id " +
 //                    "JOIN pim_employee_position pep on pep.id = r.employee_position_id " +
@@ -34,10 +63,10 @@ import java.util.Date;
 //                    "JOIN pim_individual docpi on docpi.id = pe.individual_id " +
 //                    "JOIN pim_individual pi on pi.id = r.patient_id " +
 //                    "JOIN pim_department pd on pd.id = bfr.kitchen_id " +
-                        "WHERE bfr.id = :id"
+                        "WHERE bfr.id = :id",resultSetMapping = "babyFoodReceiptMapping"
         )
 })
-*/
+
 public class BabyFoodReceiptEntity extends ReceiptEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -51,11 +80,11 @@ public class BabyFoodReceiptEntity extends ReceiptEntity {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "kitchen_id")
     private DepartmentEntity kitchen;
-
-    @Column(name = "begin_dt", nullable = false)
+//, columnDefinition="timestamp", length=6
+    @Column(name = "begin_dt", columnDefinition="DATE", nullable = false)
     private java.util.Date beginDate;
 
-    @Column(name = "end_dt", nullable = false)
+    @Column(name = "end_dt", columnDefinition="DATE", nullable = false)
     private java.util.Date endDate;
 
     @Column(name = "age_category_id", nullable = false)
@@ -64,30 +93,40 @@ public class BabyFoodReceiptEntity extends ReceiptEntity {
     public BabyFoodReceiptEntity(){
     }
 
-    public BabyFoodReceiptEntity(Long id
+    public BabyFoodReceiptEntity(
+//            Integer id,
+                                  Integer receiptTypeId
+                                , Integer signId
                                 , String series
                                 , String num
                                 , Date issueDate
                                 , Date beginDate
                                 , Date endDate
-                                , Integer patient
+                                , Integer patientId
                                 , Integer ageCategoryId
                                 , Integer benefitDefinitionId
-                                , Integer kitchen
-                                , Integer clinic
+                                , Integer diagnosisId
+                                , Integer kitchenId
+                                , Integer clinicId
                                 , Integer emplPosId) {
-        setId(id);
+//        setId(id);
+        setReceiptType(new ReceiptTypeEntity(receiptTypeId));
+        setSignId(signId);
         setSeries(series);
         setNum(num);
         setIssueDt(issueDate);
         setBeginDate(beginDate);
         setEndDate(endDate);
-        setPatient(new IndividualEntity(patient));
+        setPatient(new IndividualEntity(patientId));
         setAgeCategoryId(ageCategoryId);
         setBenefitDefinitionId(benefitDefinitionId);
-        setKitchen(new DepartmentEntity(kitchen));
-        setClinic(new ClinicEntity(clinic));
+        setDiagnosis(new DiagnosisEntity(diagnosisId));
+        setKitchen(new DepartmentEntity(kitchenId));
+        setClinic(new ClinicEntity(clinicId));
         setEmplPos(new EmployeePositionEntity(emplPosId));
+    }
+
+    private void setSignId(Integer signId) {
     }
 
 }

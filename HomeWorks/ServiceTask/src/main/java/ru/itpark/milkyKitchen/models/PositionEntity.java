@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.pim_position")
+@Table(name="pim_position", schema="public")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DynamicUpdate
 public class PositionEntity {

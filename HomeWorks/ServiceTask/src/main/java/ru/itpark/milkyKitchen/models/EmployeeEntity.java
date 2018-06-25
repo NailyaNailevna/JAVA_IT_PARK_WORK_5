@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.pim_employee")
+@Table(name="pim_employee", schema="public")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class EmployeeEntity {
 
@@ -49,6 +49,6 @@ public class EmployeeEntity {
     @Temporal (TemporalType.DATE)
     private Date dismissalDt;
 
-    @Column(name = "note")
-    private String note;
+//    @Column(name = "note")
+//    private String note;
 }

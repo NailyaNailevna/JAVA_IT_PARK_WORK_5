@@ -1,9 +1,6 @@
 package ru.itpark.milkyKitchen.forms;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -13,24 +10,31 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Builder
 public class BabyFoodReceiptForm {
-    Integer id;
-    Integer clinicId;
-    Integer refDepId;
+//    Integer id;
     Integer typeId;
     Integer signId;
-    Integer validityId;
+//    Integer validityId;
+
+    //Integer refDepId;
     String series;
     String num;
     Date issueDt;
-    Integer employeePositionId;
-    Integer patientId;
-    Integer benefitDefinitionId;
-    Integer ageCategoryId;
-    Integer diagnosisId;
-    Integer kitchenId;
     Date beginDt;
     Date endDt;
-    Boolean isSeparate;
+    Integer patientId;
+    Integer ageCategoryId;
+    Integer benefitDefinitionId;
+    Integer diagnosisId;
+    Integer kitchenId;
+
+    Integer clinicId;
+    Integer employeePositionId;
+//    Boolean isSeparate;
+
+
+
 }

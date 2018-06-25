@@ -1,6 +1,7 @@
 package ru.itpark.milkyKitchen.services;
 
 import ru.itpark.milkyKitchen.dto.BabyFoodReceiptDto;
+import ru.itpark.milkyKitchen.dto.DepartmentDto;
 
 import java.util.List;
 
@@ -10,4 +11,8 @@ import java.util.List;
 
 public interface ReceiptService {
     List<BabyFoodReceiptDto> getAllReceipts();
+
+    List<DepartmentDto> getKitchens();
+
+//    Integer addReceipt(BabyFoodReceiptForm babyFoodReceiptForm);
 }

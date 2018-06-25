@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="public.md_receipt_type")
+@Table(name="md_receipt_type", schema="public")
 public class ReceiptTypeEntity {
 
     @Id
@@ -45,4 +45,8 @@ public class ReceiptTypeEntity {
 
     @Column(name = "is_regular")
     private boolean isRegular;
+
+    public ReceiptTypeEntity(Integer id) {
+        this.id = id;
+    }
 }

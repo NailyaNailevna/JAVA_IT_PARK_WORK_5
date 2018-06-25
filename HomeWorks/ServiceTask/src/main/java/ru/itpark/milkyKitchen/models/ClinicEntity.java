@@ -1,9 +1,6 @@
 package ru.itpark.milkyKitchen.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,8 +13,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 @Entity
-@Table(name="public.md_clinic")
+@Table(name="md_clinic", schema="public")
 public class ClinicEntity {
 
     @Id
@@ -30,10 +28,10 @@ public class ClinicEntity {
     private String code;
 
     @Column(name = "full_name", nullable = false)
-    private String fname;
+    private String fullName;
 
     @Column(name = "short_name", nullable = false)
-    private String sname;
+    private String shortName;
 
     @Column(name = "from_dt")
     @Temporal (TemporalType.DATE)
@@ -46,4 +44,5 @@ public class ClinicEntity {
     public ClinicEntity(Integer id) {
         this.id = id;
     }
+
 }

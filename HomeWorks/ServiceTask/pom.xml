@@ -62,7 +62,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vladmihalcea</groupId>
+            <artifactId>hibernate-types-52</artifactId>
+            <version>1.2.0</version>
+        </dependency>
     </dependencies>
-
 
 </project>

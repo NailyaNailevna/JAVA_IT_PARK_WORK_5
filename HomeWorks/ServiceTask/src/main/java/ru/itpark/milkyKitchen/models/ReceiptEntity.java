@@ -1,23 +1,25 @@
 package ru.itpark.milkyKitchen.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import ru.itpark.milkyKitchen.enums.ReceiptSignEnum;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by nailya.shakirova on 02.06.2018.
  */
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+//@Builder
+@Getter
+@Setter
 @Entity
-@Table(name="ehr.receipt")
+@Table(name="receipt", schema="ehr")
 @Inheritance(strategy = InheritanceType.JOINED)
 /*
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -43,7 +45,7 @@ public class ReceiptEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receipt_id_gen")
     @SequenceGenerator(name = "receipt_id_gen", sequenceName = "ehr.receipt_id_seq", allocationSize = 1)
     @Access(AccessType.PROPERTY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id", nullable = false)
@@ -59,7 +61,7 @@ public class ReceiptEntity {
     @Column(name = "num")
     private String num;
 
-    @Column(name = "issue_dt", nullable = false)
+    @Column(name = "issue_dt", columnDefinition="DATE", nullable = false)
     private java.util.Date issueDt;
 
     @ManyToOne (fetch = FetchType.LAZY)
@@ -70,15 +72,13 @@ public class ReceiptEntity {
     @JoinColumn(name = "patient_id", nullable = false)
     private IndividualEntity patient;
 
-//    @ManyToOne (fetch = FetchType.LAZY)
-//    @JoinColumn(name = "sign_id", nullable = false)
-//    private ReceiptSignEntity receiptSign;
     @Column(name = "sign_id")
-    @Enumerated(value = EnumType.STRING)
-    private ReceiptSignEnum receiptSign;
+//    @Enumerated(value = EnumType.STRING)
+//    private ReceiptSignEnum receiptSign;
+    private Integer receiptSignId;
 
     @Column(name = "cito", nullable = false)
-    private boolean cito;
+    private Boolean cito;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "diagnosis_id")
@@ -89,7 +89,7 @@ public class ReceiptEntity {
     private ReceiptValidityEntity receiptValidity;
 
     @Column(name = "canceled", nullable = false)
-    private boolean canceled;
+    private Boolean canceled;
 
     public IndividualEntity getIndividual() {
         return patient;
@@ -103,4 +103,41 @@ public class ReceiptEntity {
         return patient == null ? null : patient.getId();
     }
 
+    public ReceiptEntity(){
+    }
+
+    public ReceiptEntity(Integer id){
+    }
+
+    public ReceiptEntity(Integer id
+            , Integer receiptTypeId
+            , String series
+            , String num
+            , Date issueDate
+            , Integer clinic
+            , Integer emplPosId
+            , Integer patient
+            , Integer receiptSignId
+            , Boolean cito
+            , Integer diagnosisId
+            , Integer receiptValidityId
+            , Boolean canceled) {
+        setId(id);
+        setReceiptType(new ReceiptTypeEntity(receiptTypeId));
+        setSeries(series);
+        setNum(num);
+        setIssueDt(issueDate);
+        setClinic(new ClinicEntity(clinic));
+        setEmplPos(new EmployeePositionEntity(emplPosId));
+        setPatient(new IndividualEntity(patient));
+        setReceiptSignId();
+        setCito();        
+        setDiagnosis(new DiagnosisEntity(diagnosisId));
+        setReceiptValidity(new ReceiptValidityEntity(receiptValidityId));
+    }
+
+    private void setCito() {
+    }
+
+    private void setReceiptSignId() {}
 }
