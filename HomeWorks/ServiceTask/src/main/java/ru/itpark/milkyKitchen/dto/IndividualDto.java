@@ -16,10 +16,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class IndividualDto {
-    private Long id;
-    private String surname;
-    private String name;
-    private String patrName;
+    private Integer id;
+//    private String surname;
+//    private String name;
+//    private String patrName;
     private Date birthDate;
     private String fio;
 }

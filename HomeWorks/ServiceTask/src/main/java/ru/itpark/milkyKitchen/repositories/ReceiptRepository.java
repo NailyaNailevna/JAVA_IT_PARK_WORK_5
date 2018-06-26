@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 //import org.springframework.stereotype.Repository;
 import org.springframework.test.context.jdbc.Sql;
 import ru.itpark.milkyKitchen.models.BabyFoodReceiptEntity;
+import ru.itpark.milkyKitchen.models.ReceiptEntity;
 
 import java.util.List;
 
@@ -14,7 +15,9 @@ import java.util.List;
 
 //@Repository("ReceiptRepository")
 public interface ReceiptRepository extends JpaRepository<BabyFoodReceiptEntity,Long>{
-    BabyFoodReceiptEntity findById (int id);
+
+    @Query(nativeQuery = true, value = "SELECT r.id FROM ehr.receipt r where r.id = ?1")
+    List<ReceiptEntity> findById(Integer id);
 
 //    @Query(nativeQuery = true, value = "SELECT * FROM receipt.baby_food_receipt bfr JOIN receipt.receipt r where r.clinic_id = ?1")
 //    where r.clinic_id = 490
@@ -23,5 +26,6 @@ public interface ReceiptRepository extends JpaRepository<BabyFoodReceiptEntity,L
     List<BabyFoodReceiptEntity> findAll();
 
 
+//    Integer save(ReceiptEntity newReceipt);
 
 }

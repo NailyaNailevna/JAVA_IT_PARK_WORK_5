@@ -20,7 +20,7 @@ public class IssueProductServiceImpl implements IssueProductService{
     private IssueProductRepository issueProductRepository;
 
 
-    public List<IssueProductDto> getAllProducts(Integer receiptId) {
+    public List<IssueProductDto> getAllIssues(Integer receiptId) {
 //        ReceiptEntity receipt = ReceiptRepository.findById(receiptId);
         List<IssueProductEntity> products = issueProductRepository.findAllByReceiptId(receiptId);
 

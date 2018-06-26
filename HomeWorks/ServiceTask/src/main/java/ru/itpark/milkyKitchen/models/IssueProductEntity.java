@@ -2,11 +2,12 @@ package ru.itpark.milkyKitchen.models;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.util.Date;
+
 
 /**
  * Created by nailya.shakirova on 05.06.2018.
@@ -20,9 +21,9 @@ import java.util.Date;
 @Setter
 @Entity
 //@TypeDefs({@TypeDef(name = "JsonObject", typeClass = CacheObject.class)})
-@TypeDefs({
-        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
+//@TypeDefs({
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+//})
 @Table(name="issue_product", schema="milky")
 public class IssueProductEntity {
 
@@ -39,13 +40,13 @@ public class IssueProductEntity {
     @Temporal (TemporalType.DATE)
     private Date distributeDt;
 
-//    @Type(type = "jsonb")
-//    @Column(name = "distribute_info", columnDefinition = "jsonb")
+    @Type(type = "jsonb")
+    @Column(name = "distribute_info", columnDefinition = "jsonb")
 //    @Type(type = "JsonObject")
 //    private JsonMapType distributeInfo;
 //    private DistributeInfo distributeInfo;
-    @Column(name = "distribute_info")
-    private String distributeInfo;
+//    @Column(name = "distribute_info")
+    private JsonBinaryType distributeInfo;
 
     @Column(name ="user_id")
     private Integer userId;
@@ -54,8 +55,7 @@ public class IssueProductEntity {
         this.id = id;
     }
 /*
-    @Type(
-            type = "jsonb",
+    @Type(type = "jsonb",
             parameters = {
                     @org.hibernate.annotations.Parameter(
                             name = TypeReferenceFactory.FACTORY_CLASS,

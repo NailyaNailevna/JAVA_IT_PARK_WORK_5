@@ -16,4 +16,7 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
     @Query(nativeQuery = true, value = "SELECT d.id, d.code, d.name, d.org_id, d.kind_id, d.from_dt, d.to_dt from public.pim_department d where d.kind_id = 126 and d.org_id = 490")
 //    ?1
     List<DepartmentEntity> findByClinicId();
+
+    @Query(nativeQuery = true, value = "SELECT d.id from pim_department d where d.id = ?1")
+    List<DepartmentEntity> findById(Integer id);
 }

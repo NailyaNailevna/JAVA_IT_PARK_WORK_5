@@ -3,16 +3,15 @@ package ru.itpark.milkyKitchen.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by nailya.shakirova on 02.06.2018.
  */
 
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
-@Builder()
+@Builder
 @Getter
 @Setter
 @Entity
@@ -20,7 +19,7 @@ import java.util.Date;
 //@EqualsAndHashCode(callSuper = false, of = {"id"})
 @Table(name="baby_food_receipt", schema="ehr")
 //@PrimaryKeyJoinColumn(name = "ID")
-
+/*
 @SqlResultSetMappings({
         @SqlResultSetMapping(
                 name = "babyFoodReceiptMapping",
@@ -39,14 +38,7 @@ import java.util.Date;
                                 @ColumnResult(name = "clinicId", type = Integer.class),
                                 @ColumnResult(name = "emplPosId", type = Integer.class)
                 })),
-/*        ,
-        @SqlResultSetMapping(
-                name = "classroomMappingWithCenterName",
-                classes = @ConstructorResult(targetClass = Classroom.class,
-                        columns = {@ColumnResult(name = "id", type = Long.class),
-                                @ColumnResult(name = "class_title", type = String.class),
-                                @ColumnResult(name = "lessons_count", type = Integer.class),
-                                @ColumnResult(name = "center_name", type = String.class)})),*/
+
                       }
 )
 
@@ -66,13 +58,14 @@ import java.util.Date;
                         "WHERE bfr.id = :id",resultSetMapping = "babyFoodReceiptMapping"
         )
 })
-
-public class BabyFoodReceiptEntity extends ReceiptEntity {
+*/
+//public class BabyFoodReceiptEntity extends ReceiptEntity {
+public class BabyFoodReceiptEntity{
 
     @OneToOne(cascade = CascadeType.ALL)
 //    , mappedBy = "ReceiptEntity"
     @PrimaryKeyJoinColumn
-    private ReceiptEntity receipt;
+    private ReceiptEntity receiptId;
 
     @Column(name = "benefit_definition_id", nullable = false)
     private Integer benefitDefinitionId;
@@ -89,13 +82,13 @@ public class BabyFoodReceiptEntity extends ReceiptEntity {
 
     @Column(name = "age_category_id", nullable = false)
     private Integer ageCategoryId;
-
+/*
     public BabyFoodReceiptEntity(){
     }
 
     public BabyFoodReceiptEntity(
 //            Integer id,
-                                  Integer receiptTypeId
+                                  Integer typeId
                                 , Integer signId
                                 , String series
                                 , String num
@@ -110,23 +103,26 @@ public class BabyFoodReceiptEntity extends ReceiptEntity {
                                 , Integer clinicId
                                 , Integer emplPosId) {
 //        setId(id);
-        setReceiptType(new ReceiptTypeEntity(receiptTypeId));
+        setTypeId(typeId);
         setSignId(signId);
-        setSeries(series);
-        setNum(num);
-        setIssueDt(issueDate);
+//        setSeries(series);
+//        setNum(num);
+//        setIssueDt(issueDate);
         setBeginDate(beginDate);
         setEndDate(endDate);
-        setPatient(new IndividualEntity(patientId));
+//        setPatient(new IndividualEntity(patientId));
         setAgeCategoryId(ageCategoryId);
         setBenefitDefinitionId(benefitDefinitionId);
-        setDiagnosis(new DiagnosisEntity(diagnosisId));
+//        setDiagnosis(new DiagnosisEntity(diagnosisId));
         setKitchen(new DepartmentEntity(kitchenId));
-        setClinic(new ClinicEntity(clinicId));
-        setEmplPos(new EmployeePositionEntity(emplPosId));
+//        setClinic(new ClinicEntity(clinicId));
+//        setEmplPos(new EmployeePositionEntity(emplPosId));
     }
 
     private void setSignId(Integer signId) {
     }
 
+    public void setTypeId(Integer typeId) {
+    }
+*/
 }

@@ -1,5 +1,6 @@
 package ru.itpark.milkyKitchen.dto;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import ru.itpark.milkyKitchen.models.IssueProductEntity;
 
@@ -19,7 +20,7 @@ public class IssueProductDto {
     private Integer id;
     private Integer receiptId;
     private Date distributeDt;
-    private String distributeInfo;
+    private JsonBinaryType distributeInfo;
     private Integer userId;
 
     public static IssueProductDto from(IssueProductEntity model) {

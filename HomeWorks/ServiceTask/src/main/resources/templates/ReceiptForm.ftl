@@ -21,8 +21,9 @@
     <#--</script>-->
 </head>
 <body>
-<h3>Рецепт</h3>
-<div class="receipt">
+<#--<h3>Рецепт</h3>-->
+<div class="form-style-9">
+    <div>Рецепт</div>
     <#--<fieldset>-->
         <form name="receipt" action="" method="GET">
 
@@ -44,66 +45,107 @@
         <#--<input id="validityId" name="validityId" type="hidden"/>-->
 
     <br>
-        Серия <input id="series" name="series" type="text"/>
-        Номер <input id="num" name="num" type="text"/>
+        <label for="series">
+            <span>Серия <span class="required">*</span></span>
+            <input type="text" id="series" name="series" value=""/>
+        </label>
+        <#--<input id="series" name="series" type="text"/>-->
 
-        Дата выписки <input id="issueDt" name="issueDt" type="date"/>
-    <br>
-    <br>
-        Действует с <input id="beginDt" name="beginDt" type="date"/>
-        по <input id="endDt" name="endDt" type="date"/>
-    <br>
-    <br>
-        Пациент <input id="patientId" name="patientId" type="text">
-    <br>
-    <br>
-        Дата рождения <input id="birthDt" name="birthDt" type="date"/>
-        Возраст <input id="age" name="age" type="text" readonly="readonly">
-<#--    <br>
-    <br>
-        Возраст <input id="age" name="age" type="text" readonly="readonly">
--->
-    <br>
-    <br>
-        Возрастная категория <input id="ageCategoryId" name="ageCategoryId" type="text">
-        Код категории граждан <input id="benefitDefinitionId" name="benefitDefinitionId" type="text">
-    <br>
-    <br>
-        Диагноз <input id="diagnosisId" name="diagnosisId" type="text">
-    <br>
-    <br>
-        Пункт ДМК <input id="kitchen" name="kitchen" type="text"/>
-    <br>
-    <br>
-        МО <input id="orgId" name="orgId" type="text" value="490" readonly="readonly"/>
-        Врач <input id="employeePositionId" name="employeePositionId" type="text" value="8327" readonly="readonly"/>
+        <label for="num">
+            <span>Номер <span class="required">*</span></span>
+            <input id="num" name="num" type="text"/>
+        </label>
 
-        <#--<input id="kitchen" type="text" name="kitchen"  size="40" list="kitchens" />-->
-        <#--<#list kitchens as kitchen>-->
-            <#--<input type="test" name="${kitchen.name}" value="${kitchen.id}" />-->
-        <#--</#list>-->
-    <#--<#list kitchens as kitchen>-->
-        <#--<tr>-->
-            <#--<td>-->
-                <#--<p id="user_id">${kitchen.id}</p>-->
-            <#--</td>-->
-            <#--<td>-->
-            <#--${kitchen.login}-->
-            <#--</td>-->
-        <#--</tr>-->
-    <#--</#list>-->
-
-        <#--<datalist id="kitchens" kitchens as kitchen>-->
-            <#--<c:forEach var="row" items="${kitchens}">-->
-                <#--<option value="${kitchen.id}">${kitchen.name}</option>-->
-            <#--</c:forEach>-->
-            <#--<option value="Canada">-->
-            <#--<option value="Germany">-->
-            <#--<option value="France">-->
-            <#--<option value="United Kingdom">-->
-            <#--<option value="United States">-->
-        <#--</datalist>-->
+        <label for="issueDt">
+            <span>Дата выписки <span class="required">*</span></span>
+                <input id="issueDt" name="issueDt" type="date"/>
+        </label>
     <br>
+        <label for="beginDt">
+            <span>Действует с <span class="required">*</span></span>
+            <input id="beginDt" name="beginDt" type="date"/>
+        </label>
+        <label for="endDt">
+            <span>по <span class="required">*</span></span>
+            <input id="endDt" name="endDt" type="date"/>
+        </label>
+    <br>
+        <label for="patient">
+            <span>Пациент <span class="required">*</span></span>
+            <#--<input id="patientId" name="patientId" type="search">-->
+        </label>
+        <select id="patient">
+            <option selected></option>
+            <#list patients as patient>
+                <option value="${patient.id}">${patient.fio}</option>
+            </#list>
+        </select>
+    <br>
+        <label for="birthDt">
+            <span>Дата рождения <span class="required">*</span></span>
+            <input id="birthDt" name="birthDt" type="date"/>
+            <#--value="${patient.birthDate}"-->
+        </label>
+        <label for="age">
+            <span>Возраст </span>
+            <input id="age" name="age" type="text" readonly="readonly">
+        </label>
+    <br>
+        <label for="ageCategory">
+            <span>Возрастная категория <span class="required">*</span></span>
+            <#--<input id="ageCategoryId" name="ageCategoryId" type="search" style="width:35%;">-->
+            <select id="ageCategory" style="width:15%;">
+                <option selected></option>
+                <option value="1">Категория I</option>
+                <option value="2">Категория II</option>
+                <option value="3">Категория III</option>
+            </select>
+        </label>
+        <label for="benefitDefinition">
+            <span>Код категории граждан <span class="required">*</span></span>
+            <#--<input id="benefitDefinitionId" name="benefitDefinitionId" type="search" style="width:35%">-->
+            <select id="benefitDefinition" style="width:30%;">
+                <option selected></option>
+                <option value="73">По социальному положению</option>
+                <option value="74">По заболеванию</option>
+            </select>
+        </label>
+    <br>
+        <label for="diagnosis">
+            <span>Диагноз</span>
+        </label>
+        <select id="diagnosis" style="width:89%;">
+            <option selected></option>
+            <#list diagnosis as diagnos>
+                <option value="${diagnos.id}">${diagnos.code}: ${diagnos.name}</option>
+            </#list>
+        </select>
+    <br>
+        <label for="kitchen" style="width:84%;">
+            <span>Пункт ДМК <span class="required">*</span></span>
+        </label>
+        <select id="kitchen">
+        <#list kitchens as kitchen>
+              <option value="${kitchen.id}">${kitchen.name}</option>
+        </#list>
+        </select>
+    <br>
+        <label for="org">
+            <span>МО <span class="required">*</span></span>
+            <#--<input id="orgId" name="orgId" type="text" value="490" readonly="readonly"/>-->
+        </label>
+        <select id="org" style="width:35%;" disabled="disabled">
+            <option value="490">Контрольная МО</option>
+        </select>
+        <input id="org.id" name="orgId" type="text" value="490" hidden="hidden"/>
+
+        <label for="employeePosition">
+            <span>Врач <span class="required">*</span></span>
+        </label>
+        <select id="employeePosition" style="width:35%;" disabled="disabled">
+            <option value="8327">терапевт Башнев М.А.</option>
+        </select>
+            <input id="employeePositionId" name="employeePositionId" type="text" value="8327" readonly="readonly" hidden="hidden"/>
     <br>
         <input type="submit" value="Сохранить" />
 

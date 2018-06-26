@@ -1,9 +1,6 @@
 package ru.itpark.milkyKitchen.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +14,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 @Table(name="md_diagnosis", schema="public")
 public class DiagnosisEntity {
 
@@ -40,7 +39,7 @@ public class DiagnosisEntity {
     private Integer level;
 
     @Column(name = "is_leaf")
-    private boolean isLeaf;
+    private Boolean isLeaf;
 
     @Column(name = "e_code")
     private String ecode;
@@ -56,4 +55,6 @@ public class DiagnosisEntity {
     public DiagnosisEntity(Integer id) {
         this.id = id;
     }
+
+//    getFullName
 }

@@ -62,7 +62,11 @@ public class IndividualEntity {
                 builder.append(" ");
             builder.append(patrName);
         }
+        if (birthDate != null) {
+            if (surname != null || name != null || patrName != null)
+                builder.append(" ");
+            builder.append(birthDate);
+        }
         return builder;
     }
-
 }

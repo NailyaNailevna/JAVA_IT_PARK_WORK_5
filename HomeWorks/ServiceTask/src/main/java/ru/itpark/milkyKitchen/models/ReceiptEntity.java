@@ -1,21 +1,17 @@
 package ru.itpark.milkyKitchen.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by nailya.shakirova on 02.06.2018.
  */
 
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
-//@Builder
+@Builder
 @Getter
 @Setter
 @Entity
@@ -47,13 +43,17 @@ public class ReceiptEntity {
     @Access(AccessType.PROPERTY)
     private Integer id;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "clinic_id", nullable = false)
-    private ClinicEntity clinic;
+//    @ManyToOne (fetch = FetchType.LAZY)
+//    @JoinColumn(name = "clinic_id", nullable = false)
+//    private ClinicEntity clinicId;
+    @Column(name = "clinic_id", nullable = false)
+    private Integer clinicId;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id", nullable = false)
-    private ReceiptTypeEntity receiptType;
+//    @ManyToOne (fetch = FetchType.LAZY)
+//    @JoinColumn(name = "type_id", nullable = false)
+//    private ReceiptTypeEntity receiptType;
+    @Column(name = "type_id")
+    private Integer typeId;
 
     @Column(name = "series")
     private String series;
@@ -66,23 +66,25 @@ public class ReceiptEntity {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_position_id", nullable = false)
-    private EmployeePositionEntity emplPos;
+    private EmployeePositionEntity emplPosId;
+//    @Column(name = "employee_position_id", nullable = false)
+//    private Integer emplPosId;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
-    private IndividualEntity patient;
+    private IndividualEntity patientId;
 
     @Column(name = "sign_id")
 //    @Enumerated(value = EnumType.STRING)
 //    private ReceiptSignEnum receiptSign;
-    private Integer receiptSignId;
+    private Integer signId;
 
     @Column(name = "cito", nullable = false)
     private Boolean cito;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "diagnosis_id")
-    private DiagnosisEntity diagnosis;
+    private DiagnosisEntity diagnosisId;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "validity_id", nullable = false)
@@ -91,53 +93,48 @@ public class ReceiptEntity {
     @Column(name = "canceled", nullable = false)
     private Boolean canceled;
 
-    public IndividualEntity getIndividual() {
-        return patient;
-    }
+//    public IndividualEntity getIndividual(int patientId) {
+//        return patient;
+//    }
 
-    public void setPatient(IndividualEntity patient) {
-        this.patient = patient;
-    }
+//    public void setPatientId(IndividualEntity patient) {
+//        this.patient.setId() = patient.getId();
+//    }
 
-    public Integer getpatientId() {
-        return patient == null ? null : patient.getId();
-    }
+//    public Integer getPatientId() {
+//        return patient == null ? null : patient.getId();
+//    }
 
-    public ReceiptEntity(){
-    }
 
-    public ReceiptEntity(Integer id){
-    }
-
+//    public ReceiptEntity(Integer id){
+//    }
+/*
     public ReceiptEntity(Integer id
-            , Integer receiptTypeId
+            , Integer typeId
             , String series
             , String num
             , Date issueDate
             , Integer clinic
             , Integer emplPosId
-            , Integer patient
+            , Integer patientId
             , Integer receiptSignId
             , Boolean cito
             , Integer diagnosisId
             , Integer receiptValidityId
             , Boolean canceled) {
         setId(id);
-        setReceiptType(new ReceiptTypeEntity(receiptTypeId));
+        setTypeId(typeId);
         setSeries(series);
         setNum(num);
         setIssueDt(issueDate);
         setClinic(new ClinicEntity(clinic));
         setEmplPos(new EmployeePositionEntity(emplPosId));
-        setPatient(new IndividualEntity(patient));
-        setReceiptSignId();
-        setCito();        
+        setPatient(new IndividualEntity(patientId));
+        setSignId(receiptSignId);
+        setCito(cito);
         setDiagnosis(new DiagnosisEntity(diagnosisId));
         setReceiptValidity(new ReceiptValidityEntity(receiptValidityId));
     }
+*/
 
-    private void setCito() {
-    }
-
-    private void setReceiptSignId() {}
 }

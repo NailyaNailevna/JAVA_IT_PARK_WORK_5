@@ -23,6 +23,7 @@
     <body>
     <h3>Журнал рецептов</h3>
     <a href="addReceipt">Создать Рецепт</a>
+    <#--<a href="addIssue">Выдать продукты</a>-->
     <br><br>
     <div class="receipts">
         <table>
@@ -82,7 +83,7 @@
         </#list>
         </table>
     </div>
-
+<#--
     <br><br>
     <div class="products">
         <table>
@@ -108,9 +109,6 @@
                 <th>
                     Дата 6
                 </th>
-            <#--<th>-->
-            <#--Врач-->
-            <#--</th>-->
             </tr>
         <#list products as product>
             <tr>
@@ -129,9 +127,6 @@
                 <td>
                 ${receipt.birthDate}
                 </td>
-            <#--<td>-->
-            <#--${receipt.age}-->
-            <#--</td>-->
                 <td>
                 ${receipt.kitchenName}
                 </td>
@@ -142,5 +137,6 @@
         </#list>
         </table>
     </div>
+    -->
     </body>
 </html>

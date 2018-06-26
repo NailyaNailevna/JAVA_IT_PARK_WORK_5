@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public interface IssueProductService {
-    List<IssueProductDto> getAllProducts(Integer receiptId);
+    List<IssueProductDto> getAllIssues(Integer receiptId);
 
 //    Integer addReceipt(IssueProductForm issueProductForm);
 }
