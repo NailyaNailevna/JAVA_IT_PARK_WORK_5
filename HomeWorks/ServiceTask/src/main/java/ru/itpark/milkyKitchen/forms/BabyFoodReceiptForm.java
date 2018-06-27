@@ -1,6 +1,7 @@
 package ru.itpark.milkyKitchen.forms;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -17,13 +18,15 @@ public class BabyFoodReceiptForm {
 //    Integer id;
     Integer typeId;
     Integer signId;
-//    Integer validityId;
+//    Boolean cito;
 
-    //Integer refDepId;
     String series;
     String num;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date issueDt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date beginDt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date endDt;
     Integer patientId;
     Integer ageCategoryId;
@@ -33,8 +36,5 @@ public class BabyFoodReceiptForm {
 
     Integer clinicId;
     Integer employeePositionId;
-//    Boolean isSeparate;
-
-
 
 }

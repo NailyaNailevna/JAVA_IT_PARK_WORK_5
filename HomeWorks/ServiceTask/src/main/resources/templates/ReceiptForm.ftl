@@ -25,7 +25,7 @@
 <div class="form-style-9">
     <div>Рецепт</div>
     <#--<fieldset>-->
-        <form name="receipt" action="" method="GET">
+        <form name="receipt" action="/addReceipt" method="post">
 
     <#--<form action="/addReceipt" method="post">-->
         <#--<select class="form-control" id="clinics" name="testOrder">-->
@@ -42,7 +42,7 @@
 <#--<div>-->
         <input id="typeId" name="typeId" type="text" value="5" readonly="readonly"/>
         <input id="signId" name="signId" type="text" value="2" readonly="readonly"/>
-        <#--<input id="validityId" name="validityId" type="hidden"/>-->
+        <#--<input id="cito" name="cito" type="text" value="false" readonly="readonly"/>-->
 
     <br>
         <label for="series">
@@ -72,18 +72,22 @@
     <br>
         <label for="patient">
             <span>Пациент <span class="required">*</span></span>
-            <#--<input id="patientId" name="patientId" type="search">-->
+            <#--<input id="patientId" name="patientId" value="7455768" type="search">-->
         </label>
-        <select id="patient">
+        <select id="patient" name="patientId"
+            onChange="document.OrderForm.TT.value=document.OrderForm.patientId.options[document.OrderForm.patientId.selectedIndex].text;">
             <option selected></option>
             <#list patients as patient>
-                <option value="${patient.id}">${patient.fio}</option>
+                <option value="${patient.id?c}">${patient.fio}</option>
             </#list>
         </select>
+        <#--$(".js-example-tags").select2({-->
+        <#--tags: true-->
+        <#--});-->
     <br>
         <label for="birthDt">
             <span>Дата рождения <span class="required">*</span></span>
-            <input id="birthDt" name="birthDt" type="date"/>
+            <input id="birthDt" name="birthDt" type="date" value=""/>
             <#--value="${patient.birthDate}"-->
         </label>
         <label for="age">
@@ -93,8 +97,9 @@
     <br>
         <label for="ageCategory">
             <span>Возрастная категория <span class="required">*</span></span>
-            <#--<input id="ageCategoryId" name="ageCategoryId" type="search" style="width:35%;">-->
-            <select id="ageCategory" style="width:15%;">
+            <#--<input id="ageCategoryId" name="ageCategoryId" value="3" type="search" style="width:15%;">-->
+            <select id="ageCategory" name="ageCategoryId" style="width:15%;"
+                    onChange="document.OrderForm.TT.value=document.OrderForm.ageCategoryId.options[document.OrderForm.ageCategoryId.selectedIndex].text;">
                 <option selected></option>
                 <option value="1">Категория I</option>
                 <option value="2">Категория II</option>
@@ -103,8 +108,9 @@
         </label>
         <label for="benefitDefinition">
             <span>Код категории граждан <span class="required">*</span></span>
-            <#--<input id="benefitDefinitionId" name="benefitDefinitionId" type="search" style="width:35%">-->
-            <select id="benefitDefinition" style="width:30%;">
+            <#--<input id="benefitDefinitionId" name="benefitDefinitionId" type="search" value="73" style="width:30%">-->
+            <select id="benefitDefinition" name="benefitDefinitionId" style="width:30%;"
+                    onChange="document.OrderForm.TT.value=document.OrderForm.benefitDefinitionId.options[document.OrderForm.benefitDefinitionId.selectedIndex].text;">
                 <option selected></option>
                 <option value="73">По социальному положению</option>
                 <option value="74">По заболеванию</option>
@@ -114,30 +120,34 @@
         <label for="diagnosis">
             <span>Диагноз</span>
         </label>
-        <select id="diagnosis" style="width:89%;">
+        <#--<input id="diagnosisId" name="diagnosisId" type="search" value="21431" style="width:30%">-->
+        <select id="diagnosis" name="diagnosisId" style="width:89%;"
+                onChange="document.OrderForm.TT.value=document.OrderForm.diagnosisId.options[document.OrderForm.diagnosisId.selectedIndex].text;">
             <option selected></option>
             <#list diagnosis as diagnos>
-                <option value="${diagnos.id}">${diagnos.code}: ${diagnos.name}</option>
+                <option value="${diagnos.id?c}">${diagnos.code}: ${diagnos.name}</option>
             </#list>
         </select>
     <br>
         <label for="kitchen" style="width:84%;">
             <span>Пункт ДМК <span class="required">*</span></span>
+            <#--<input id="kitchenId" name="kitchenId" type="search" value="57704" style="width:30%">-->
         </label>
-        <select id="kitchen">
+        <select id="kitchen" name="kitchenId"
+                onChange="document.OrderForm.TT.value=document.OrderForm.kitchenId.options[document.OrderForm.kitchenId.selectedIndex].text;">
         <#list kitchens as kitchen>
-              <option value="${kitchen.id}">${kitchen.name}</option>
+              <option value="${kitchen.id?c}">${kitchen.name}</option>
         </#list>
         </select>
     <br>
-        <label for="org">
+        <label for="clinic">
             <span>МО <span class="required">*</span></span>
             <#--<input id="orgId" name="orgId" type="text" value="490" readonly="readonly"/>-->
         </label>
-        <select id="org" style="width:35%;" disabled="disabled">
+        <select id="clinic" name="clinicId" style="width:35%;" disabled="disabled">
             <option value="490">Контрольная МО</option>
         </select>
-        <input id="org.id" name="orgId" type="text" value="490" hidden="hidden"/>
+        <input id="clinic" name="clinicId" type="text" value="490" hidden="hidden"/>
 
         <label for="employeePosition">
             <span>Врач <span class="required">*</span></span>
@@ -147,7 +157,7 @@
         </select>
             <input id="employeePositionId" name="employeePositionId" type="text" value="8327" readonly="readonly" hidden="hidden"/>
     <br>
-        <input type="submit" value="Сохранить" />
+        <input type="submit" value="Сохранить"/>
 
     </form>
     <#--</fieldset>-->

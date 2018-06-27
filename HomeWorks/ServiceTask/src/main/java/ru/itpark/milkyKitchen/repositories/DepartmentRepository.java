@@ -7,6 +7,7 @@ import ru.itpark.milkyKitchen.dto.DepartmentDto;
 import ru.itpark.milkyKitchen.models.DepartmentEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by nailya.shakirova on 25.06.2018.
@@ -19,4 +20,7 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, In
 
     @Query(nativeQuery = true, value = "SELECT d.id from pim_department d where d.id = ?1")
     List<DepartmentEntity> findById(Integer id);
+
+    @Query(nativeQuery = true, value = "SELECT * from pim_department d where d.id = ?1")
+    Optional<DepartmentEntity> findOneById(Integer id);
 }

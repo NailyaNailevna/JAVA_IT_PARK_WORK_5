@@ -14,9 +14,10 @@ import java.util.List;
 
 //@Repository("ReceiptRepository")
 public interface IssueProductRepository extends JpaRepository<IssueProductEntity,Long>{
-//    IssueProductEntity findById(int id);
 
-    @Query(nativeQuery = true, value = "SELECT ip.id,  ip.receipt_id, ip.distribute_dt, ip.distribute_info, ip.user_id FROM milky.issue_product ip JOIN ehr.baby_food_product prod on prod.id where ip.receipt_id = ?1" )
-    List<IssueProductEntity> findAllByReceiptId(int receiptId);
+//    @Query(nativeQuery = true, value = "SELECT ip.id,  ip.receipt_id, ip.distribute_dt, ip.distribute_info, ip.user_id FROM milky.issue_product ip JOIN ehr.baby_food_product prod on prod.id where ip.receipt_id = ?1" )
+    @Query(nativeQuery = true, value = "SELECT * FROM milky.issue_product ip where ip.receipt_id = 1" )
+    List<IssueProductEntity> getAllIssues();
+//    int receiptId
 
 }

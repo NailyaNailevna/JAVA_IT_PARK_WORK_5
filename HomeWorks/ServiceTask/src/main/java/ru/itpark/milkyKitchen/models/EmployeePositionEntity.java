@@ -18,7 +18,7 @@ import java.util.Date;
 @Builder
 @Entity
 @Table(name="pim_employee_position", schema="public")
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class EmployeePositionEntity {
 
     @Id

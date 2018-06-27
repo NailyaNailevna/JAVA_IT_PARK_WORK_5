@@ -41,7 +41,7 @@ public class BabyFoodReceiptDto {
 
     public static BabyFoodReceiptDto from(BabyFoodReceiptEntity model) {
         return BabyFoodReceiptDto.builder()
-                .id(model.getReceipt().getId())
+                .id(model.getReceiptId().getId())
 //                .series(model.getReceipt().getSeries())
 //                .num(model.getReceipt().getNum())
 //                .issueDt(model.getReceipt().getIssueDt())
@@ -53,8 +53,8 @@ public class BabyFoodReceiptDto {
                 .ageCategoryId(model.getAgeCategoryId())
                 .benefitDefinitionId(model.getBenefitDefinitionId())
 //                .diagnosisId(model.getReceipt().getDiagnosis().getId())
-                .kitchenId(model.getKitchen().getId())
-                .kitchenName(model.getKitchen().getName())
+                .kitchenId(model.getKitchenId().getId())
+                .kitchenName(model.getKitchenId().getName())
 //                .clinicId(model.getReceipt().getClinic().getId())
 //                .emplPosId(model.getReceipt().getEmplPos().getId())
 //                .emplPosName(model.getReceipt().getEmplPos().getEmployee().getIndiv().getFio())

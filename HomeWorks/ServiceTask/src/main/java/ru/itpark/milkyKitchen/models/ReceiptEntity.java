@@ -79,62 +79,18 @@ public class ReceiptEntity {
 //    private ReceiptSignEnum receiptSign;
     private Integer signId;
 
-    @Column(name = "cito", nullable = false)
-    private Boolean cito;
+    @Column(name = "cito", columnDefinition="boolean default false")
+    private boolean cito;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "diagnosis_id")
     private DiagnosisEntity diagnosisId;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "validity_id", nullable = false)
-    private ReceiptValidityEntity receiptValidity;
+//    @ManyToOne (fetch = FetchType.LAZY)
+//    @JoinColumn(name = "validity_id", nullable = false)
+//    private ReceiptValidityEntity receiptValidity;
 
-    @Column(name = "canceled", nullable = false)
-    private Boolean canceled;
-
-//    public IndividualEntity getIndividual(int patientId) {
-//        return patient;
-//    }
-
-//    public void setPatientId(IndividualEntity patient) {
-//        this.patient.setId() = patient.getId();
-//    }
-
-//    public Integer getPatientId() {
-//        return patient == null ? null : patient.getId();
-//    }
-
-
-//    public ReceiptEntity(Integer id){
-//    }
-/*
-    public ReceiptEntity(Integer id
-            , Integer typeId
-            , String series
-            , String num
-            , Date issueDate
-            , Integer clinic
-            , Integer emplPosId
-            , Integer patientId
-            , Integer receiptSignId
-            , Boolean cito
-            , Integer diagnosisId
-            , Integer receiptValidityId
-            , Boolean canceled) {
-        setId(id);
-        setTypeId(typeId);
-        setSeries(series);
-        setNum(num);
-        setIssueDt(issueDate);
-        setClinic(new ClinicEntity(clinic));
-        setEmplPos(new EmployeePositionEntity(emplPosId));
-        setPatient(new IndividualEntity(patientId));
-        setSignId(receiptSignId);
-        setCito(cito);
-        setDiagnosis(new DiagnosisEntity(diagnosisId));
-        setReceiptValidity(new ReceiptValidityEntity(receiptValidityId));
-    }
-*/
+    @Column(name = "canceled", columnDefinition="boolean default false")
+    private boolean canceled;
 
 }

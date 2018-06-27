@@ -2,6 +2,7 @@ package ru.itpark.milkyKitchen.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itpark.milkyKitchen.dto.BabyFoodReceiptDto;
 import ru.itpark.milkyKitchen.dto.DepartmentDto;
 import ru.itpark.milkyKitchen.dto.DiagnosisDto;
@@ -23,29 +24,32 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Autowired
     private ReceiptRepository receiptRepository;
 
+    @Autowired
+    private BabyFoodReceiptRepository babyFoodReceiptRepository;
+
 
     public List<BabyFoodReceiptDto> getAllReceipts() {
-        List<BabyFoodReceiptEntity> bfreceipts = receiptRepository.findAll();
+        List<BabyFoodReceiptEntity> bfreceipts = babyFoodReceiptRepository.findAll();
 
         List<BabyFoodReceiptDto> receiptDtos = new ArrayList<>();
         for (BabyFoodReceiptEntity bfreceipt : bfreceipts) {
             receiptDtos.add(BabyFoodReceiptDto.builder()
-                    .id(bfreceipt.getReceipt().getId())
-                    .series(bfreceipt.getReceipt().getSeries())
-                    .num(bfreceipt.getReceipt().getNum())
-                    .issueDt(bfreceipt.getReceipt().getIssueDt())
+                    .id(bfreceipt.getReceiptId().getId())
+                    .series(bfreceipt.getReceiptId().getSeries())
+                    .num(bfreceipt.getReceiptId().getNum())
+                    .issueDt(bfreceipt.getReceiptId().getIssueDt())
                     .beginDate(bfreceipt.getBeginDate())
                     .endDate(bfreceipt.getEndDate())
-                    .patientId(bfreceipt.getReceipt().getPatientId().getId())
-                    .patientFio(bfreceipt.getReceipt().getPatientId().getFio())
-                    .birthDate(bfreceipt.getReceipt().getPatientId().getBirthDate())
+                    .patientId(bfreceipt.getReceiptId().getPatientId().getId())
+                    .patientFio(bfreceipt.getReceiptId().getPatientId().getFio())
+                    .birthDate(bfreceipt.getReceiptId().getPatientId().getBirthDate())
                     .ageCategoryId(bfreceipt.getAgeCategoryId())
                     .benefitDefinitionId(bfreceipt.getBenefitDefinitionId())
-                    .kitchenId(bfreceipt.getKitchen().getId())
-                    .kitchenName(bfreceipt.getKitchen().getName())
-                    .clinicId(bfreceipt.getReceipt().getClinicId())
-                    .emplPosId(bfreceipt.getReceipt().getEmplPosId().getId())
-                    .emplPosName(bfreceipt.getReceipt().getEmplPosId().getEmployee().getIndiv().getFio())
+                    .kitchenId(bfreceipt.getKitchenId().getId())
+                    .kitchenName(bfreceipt.getKitchenId().getName())
+                    .clinicId(bfreceipt.getReceiptId().getClinicId())
+                    .emplPosId(bfreceipt.getReceiptId().getEmplPosId().getId())
+                    .emplPosName(bfreceipt.getReceiptId().getEmplPosId().getEmployee().getIndiv().getFio())
                     .build()
             );
         }
@@ -92,7 +96,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     //    @Override
     public List<IndividualDto> getIndividuals() {
-        List<IndividualEntity> individuals = individualRepository.findAllByFIO();
+        List<IndividualEntity> individuals = individualRepository.findAll();
 
         List<IndividualDto> individualDtos = new ArrayList<>();
         for (IndividualEntity individual : individuals) {
@@ -108,31 +112,15 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Autowired
     private EmplPosRepository emplPosRepository;
 
+    @Transactional
     @Override
-    public Integer addReceipt(BabyFoodReceiptForm receipt) {
-/*
-        BabyFoodReceiptEntity newBabyFoodReceipt = BabyFoodReceiptEntity.builder()
-                .typeId(receipt.getTypeId())
-                .signId(receipt.getSignId())
-                .series(receipt.getSeries())
-                .num(receipt.getNum())
-                .issueDate(receipt.getIssueDt())
-                .beginDate(receipt.getBeginDt())
-                .endDate(receipt.getEndDt())
-                .patientId(receipt.getPatientId())
-                .ageCategoryId(receipt.getAgeCategoryId())
-                .benefitDefinitionId(receipt.getBenefitDefinitionId())
-                .diagnosisId(receipt.getDiagnosisId())
-                .kitchenId(receipt.getKitchenId())
-                .clinicId(receipt.getClinicId())
-                .emplPosId(receipt.getEmployeePositionId())
-                .build();
+    public void addReceipt(BabyFoodReceiptForm receipt) {
 
-        receiptRepository.save(newBabyFoodReceipt);
-*/
-        IndividualEntity patientId = individualRepository.findById(receipt.getPatientId()).get();
-        DiagnosisEntity diagId = diagnosisRepository.findById(receipt.getDiagnosisId()).get();
-        EmployeePositionEntity emplPosId = emplPosRepository.findById(receipt.getEmployeePositionId()).get();
+        IndividualEntity patientId = individualRepository.findOneById(receipt.getPatientId()).get();
+        DiagnosisEntity diagId = diagnosisRepository.findOneById(receipt.getDiagnosisId()).get();
+
+        EmployeePositionEntity emplPosId = emplPosRepository.find(receipt.getEmployeePositionId());
+//        System.out.println(emplPosId.getEmployee());
 
         ReceiptEntity newReceipt = ReceiptEntity.builder()
                 .typeId(receipt.getTypeId())
@@ -146,27 +134,21 @@ public class ReceiptServiceImpl implements ReceiptService {
                 .emplPosId(emplPosId)
                 .build();
 
-        Integer rId = receiptRepository.save(newReceipt);
-        ReceiptEntity breceptId = ReceiptRepository.findById(rId).get();
+        receiptRepository.save(newReceipt);
+        ReceiptEntity breceptId = receiptRepository.findOneById(newReceipt.getId()).get();
 
-        DepartmentEntity depId = departmentRepository.findOne(receipt.getKitchenId()).get();
+        DepartmentEntity depId = departmentRepository.findOneById(receipt.getKitchenId()).get();
 
         BabyFoodReceiptEntity newFoodreceipt = BabyFoodReceiptEntity.builder()
-                .receiptId(breceiptId)
+                .id(breceptId.getId())
                 .beginDate(receipt.getBeginDt())
                 .endDate(receipt.getEndDt())
                 .ageCategoryId(receipt.getAgeCategoryId())
                 .benefitDefinitionId(receipt.getBenefitDefinitionId())
                 .kitchenId(depId)
                 .build();
-        /*
 
-                .beginDate(receipt.getBeginDt())
-                .endDate(receipt.getEndDt())
-                .ageCategoryId(receipt.getAgeCategoryId())
-                .benefitDefinitionId(receipt.getBenefitDefinitionId())
-                .kitchenId(kitchenId)
-         */
+        babyFoodReceiptRepository.save(newFoodreceipt);
     }
 
 }

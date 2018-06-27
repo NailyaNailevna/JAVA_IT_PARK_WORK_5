@@ -2,7 +2,7 @@
 <!doctype html>
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Issues</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"

@@ -4,6 +4,7 @@ import ru.itpark.milkyKitchen.dto.BabyFoodReceiptDto;
 import ru.itpark.milkyKitchen.dto.DepartmentDto;
 import ru.itpark.milkyKitchen.dto.DiagnosisDto;
 import ru.itpark.milkyKitchen.dto.IndividualDto;
+import ru.itpark.milkyKitchen.forms.BabyFoodReceiptForm;
 
 import java.util.List;
 
@@ -20,5 +21,6 @@ public interface ReceiptService {
 
     List<IndividualDto> getIndividuals();
 
-//    Integer addReceipt(BabyFoodReceiptForm babyFoodReceiptForm);
+    void addReceipt(BabyFoodReceiptForm babyFoodReceiptForm);
+
 }

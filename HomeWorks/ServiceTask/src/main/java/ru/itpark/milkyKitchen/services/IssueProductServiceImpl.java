@@ -20,9 +20,8 @@ public class IssueProductServiceImpl implements IssueProductService{
     private IssueProductRepository issueProductRepository;
 
 
-    public List<IssueProductDto> getAllIssues(Integer receiptId) {
-//        ReceiptEntity receipt = ReceiptRepository.findById(receiptId);
-        List<IssueProductEntity> products = issueProductRepository.findAllByReceiptId(receiptId);
+    public List<IssueProductDto> getAllIssues() {
+        List<IssueProductEntity> products = issueProductRepository.getAllIssues();
 
         List<IssueProductDto> productDtos = new ArrayList<>();
         for (IssueProductEntity product : products) {
@@ -37,28 +36,5 @@ public class IssueProductServiceImpl implements IssueProductService{
         }
         return productDtos;
     }
-
-//    @Override
-//    public Integer addReceipt(BabyFoodReceiptForm receipt) {
-//
-//        BabyFoodReceiptEntity newBabyFoodReceipt = BabyFoodReceiptEntity.builder()
-//                .receiptTypeId(receipt.getTypeId())
-//                .signId(receipt.getSignId())
-//                .series(receipt.getSeries())
-//                .num(receipt.getNum())
-//                .issueDate(receipt.getIssueDt())
-//                .beginDate(receipt.getBeginDt())
-//                .endDate(receipt.getEndDt())
-//                .patientId(receipt.getPatientId())
-//                .ageCategoryId(receipt.getAgeCategoryId())
-//                .benefitDefinitionId(receipt.getBenefitDefinitionId())
-//                .diagnosisId(receipt.getDiagnosisId())
-//                .kitchenId(receipt.getKitchenId())
-//                .clinicId(receipt.getClinicId())
-//                .emplPosId(receipt.getEmployeePositionId())
-//                .build();
-//
-//        receiptRepository.save(newBabyFoodReceipt);
-//    }
 
 }

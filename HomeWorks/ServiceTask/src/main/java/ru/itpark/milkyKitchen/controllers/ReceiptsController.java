@@ -1,16 +1,13 @@
 package ru.itpark.milkyKitchen.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import ru.itpark.milkyKitchen.dto.BabyFoodReceiptDto;
-import ru.itpark.milkyKitchen.dto.DepartmentDto;
-import ru.itpark.milkyKitchen.dto.DiagnosisDto;
-import ru.itpark.milkyKitchen.dto.IndividualDto;
+import org.springframework.web.bind.annotation.*;
+import ru.itpark.milkyKitchen.dto.*;
 import ru.itpark.milkyKitchen.forms.BabyFoodReceiptForm;
+import ru.itpark.milkyKitchen.services.IssueProductService;
 import ru.itpark.milkyKitchen.services.ReceiptService;
 
 import java.util.List;
@@ -25,6 +22,12 @@ public class ReceiptsController {
     @Autowired
     private ReceiptService service;
 
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+//        sdf.setLenient(true);
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+//    }
 
     @GetMapping("/receipts")
     public String getReceitsPage(ModelMap model) {
@@ -53,17 +56,14 @@ public class ReceiptsController {
     }
 
     //    @GetMapping("/addReceipt")
-    @RequestMapping(value = { "/addReceipt" }, method = RequestMethod.POST)
+    @PostMapping("/addReceipt")
+//    @RequestMapping(value = { "/addReceipt" }, method = RequestMethod.POST)
     public String addReceipt
-// (Model model, @ModelAttribute("receiptForm") BabyFoodReceiptForm babyFoodReceiptForm)
-    (BabyFoodReceiptForm babyFoodReceiptForm)
-    {
+     (@ModelAttribute("receiptForm") BabyFoodReceiptForm babyFoodReceiptForm) {
+//    (BabyFoodReceiptForm babyFoodReceiptForm) {
 
-//        BabyFoodReceiptEntity newReceipt = new BabyFoodReceiptEntity(series, num, issueDt);
-//        service.addReceipt(babyFoodReceiptForm);
-
+        service.addReceipt(babyFoodReceiptForm);
         return "redirect:/receipts";
-
     }
 
 /*
@@ -77,18 +77,19 @@ public class ReceiptsController {
         return "ReceiptForm";
     }
 */
-/*
+
     @Autowired
     private IssueProductService issuesService;
 
-    @GetMapping("/products/{receipt-id}")
+    @GetMapping("/receipts/{receipt-id}/issues")
     @ResponseBody
 //    public String getProductsPage(ModelMap model) {
-//    public ResponseEntity<List<IssueProductDto>>
-//        getAllProducts(@PathVariable("receipt-id") Integer receiptId){
-//        return ResponseEntity.ok(productService.getAllProducts(receiptId));
-//    }
-
+    public ResponseEntity<List<IssueProductDto>>
+        getAllProducts(@PathVariable("receipt-id") Integer receiptId){
+//        ReceiptsController productService;
+        return ResponseEntity.ok(issuesService.getAllIssues());
+    }
+/*
     public ResponseEntity<BabyFoodReceiptDto> addIssue(ModelMap model,
                                                        @PathVariable("receipt-id") Integer receiptId, @RequestParam("action") String action){
         if (action.equals("addIssue")) {
