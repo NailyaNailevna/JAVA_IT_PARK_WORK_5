@@ -8,17 +8,19 @@
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
-    <#--<script>-->
-        <#--function changeStatus(id, status_element) {-->
-            <#--$.ajax({-->
-                <#--type: "POST",-->
-                <#--url: "/receipts/" + id + "?action=change_status",-->
-                <#--success: function (response) {-->
-                    <#--status_element.innerHTML = response["state"];-->
-                <#--}-->
-            <#--});-->
-        <#--}-->
-    <#--</script>-->
+    <script>
+        function deleteReceipt(id) {
+            $.ajax({
+                type: "POST",
+                url: "/receipts/" + id + "?action=delete",
+                success: function (response) {
+//                    status_element.innerHTML = response["receipt.canceled"];
+                    location.reload();
+                }
+            });
+        }
+    </script>
+
 </head>
     <body>
     <h3>Журнал рецептов</h3>
@@ -54,7 +56,7 @@
                 </th>
             </tr>
         <#list receipts as receipt>
-            <tr>
+            <tr <#if receipt.canceled> style="color:darkgray"</#if>>
                 <td>
                     <p id="receipt_id">${receipt.id}</p>
                 </td>
@@ -78,6 +80,9 @@
                 </td>
                 <td>
                     ${receipt.emplPosName}
+                </td>
+                <td>
+                    <input type="button" value="Удалить" onclick="deleteReceipt(${receipt.id?c})"/>
                 </td>
             </tr>
         </#list>

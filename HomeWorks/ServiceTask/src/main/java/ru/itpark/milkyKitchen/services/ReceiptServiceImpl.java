@@ -3,10 +3,7 @@ package ru.itpark.milkyKitchen.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itpark.milkyKitchen.dto.BabyFoodReceiptDto;
-import ru.itpark.milkyKitchen.dto.DepartmentDto;
-import ru.itpark.milkyKitchen.dto.DiagnosisDto;
-import ru.itpark.milkyKitchen.dto.IndividualDto;
+import ru.itpark.milkyKitchen.dto.*;
 import ru.itpark.milkyKitchen.forms.BabyFoodReceiptForm;
 import ru.itpark.milkyKitchen.models.*;
 import ru.itpark.milkyKitchen.repositories.*;
@@ -50,6 +47,7 @@ public class ReceiptServiceImpl implements ReceiptService {
                     .clinicId(bfreceipt.getReceiptId().getClinicId())
                     .emplPosId(bfreceipt.getReceiptId().getEmplPosId().getId())
                     .emplPosName(bfreceipt.getReceiptId().getEmplPosId().getEmployee().getIndiv().getFio())
+                    .canceled(bfreceipt.getReceiptId().isCanceled())
                     .build()
             );
         }
@@ -117,7 +115,8 @@ public class ReceiptServiceImpl implements ReceiptService {
     public void addReceipt(BabyFoodReceiptForm receipt) {
 
         IndividualEntity patientId = individualRepository.findOneById(receipt.getPatientId()).get();
-        DiagnosisEntity diagId = diagnosisRepository.findOneById(receipt.getDiagnosisId()).get();
+
+        DiagnosisEntity diagId = (!receipt.getDiagnosisId().equals(-1))?diagnosisRepository.findOneById(receipt.getDiagnosisId()).get():null;
 
         EmployeePositionEntity emplPosId = emplPosRepository.find(receipt.getEmployeePositionId());
 //        System.out.println(emplPosId.getEmployee());
@@ -149,6 +148,17 @@ public class ReceiptServiceImpl implements ReceiptService {
                 .build();
 
         babyFoodReceiptRepository.save(newFoodreceipt);
+    }
+
+    @Override
+    public ReceiptDto delete(Integer receiptId) {
+        ReceiptEntity receipt = receiptRepository.findOne(receiptId);
+        receipt.setCanceled(true);
+        receiptRepository.save(receipt);
+
+        return ReceiptDto.builder()
+                .canceled(receipt.isCanceled())
+                .build();
     }
 
 }

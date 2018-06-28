@@ -13,4 +13,5 @@ public interface IssueProductService {
 //    (Integer receiptId)
 
 //    Integer addReceipt(IssueProductForm issueProductForm);
+//List<IssueProductEntity> findById(String id, String vol);
 }

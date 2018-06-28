@@ -36,5 +36,10 @@ public class IssueProductServiceImpl implements IssueProductService{
         }
         return productDtos;
     }
-
+/*
+    public List<IssueProductEntity> findById(String id, String vol) {
+        IssueProductRepository.ProductSpecification cs = new IssueProductRepository.ProductSpecification(id,vol);
+        return issueProductRepository.find(cs);
+    }
+*/
 }

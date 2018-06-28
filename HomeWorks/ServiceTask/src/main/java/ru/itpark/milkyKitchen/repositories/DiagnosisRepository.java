@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public interface DiagnosisRepository extends JpaRepository<DiagnosisEntity, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT md.id, md.code, md.name FROM public.md_diagnosis md where md.id = ?1")
+    @Query(nativeQuery = true, value = "SELECT md.id, md.code, md.name FROM public.md_diagnosis md where ?1::integer is null or md.id = ?1")
     List<DiagnosisEntity> findById(Integer id);
 
     @Query(nativeQuery = true, value = "SELECT * FROM public.md_diagnosis md where md.id = ?1")

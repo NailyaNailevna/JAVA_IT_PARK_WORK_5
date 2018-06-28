@@ -65,6 +65,16 @@ public class ReceiptsController {
         service.addReceipt(babyFoodReceiptForm);
         return "redirect:/receipts";
     }
+/* 28.06.2018*/
+    @PostMapping("/receipts/{receipt-id}")
+    @ResponseBody
+    public ResponseEntity<ReceiptDto> changeStatus(
+            @PathVariable("receipt-id") Integer receiptId, @RequestParam("action") String action) {
+        if (action.equals("delete")) {
+            ReceiptDto receiptDto = service.delete(receiptId);
+            return ResponseEntity.ok(receiptDto);
+        } else return ResponseEntity.notFound().build();
+    }
 
 /*
     @RequestMapping(value = { "/addProduct" }, method = RequestMethod.GET)

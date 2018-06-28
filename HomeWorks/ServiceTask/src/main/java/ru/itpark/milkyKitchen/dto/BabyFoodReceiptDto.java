@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 public class BabyFoodReceiptDto {
-//    public class BabyFoodReceiptDto extends ReceptDto{
+//    public class BabyFoodReceiptDto extends ReceiptDto{
     private Integer id;
     private String series;
     private String num;
@@ -38,6 +38,7 @@ public class BabyFoodReceiptDto {
     private Integer clinicId;
     private Integer emplPosId;
     private String emplPosName;
+    private Boolean canceled;
 
     public static BabyFoodReceiptDto from(BabyFoodReceiptEntity model) {
         return BabyFoodReceiptDto.builder()

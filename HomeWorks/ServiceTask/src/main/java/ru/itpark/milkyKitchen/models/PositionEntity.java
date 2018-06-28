@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,8 +18,6 @@ import java.util.Date;
 @Builder
 @Entity
 @Table(name="pim_position", schema="public")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DynamicUpdate
 public class PositionEntity {
 
     @Id

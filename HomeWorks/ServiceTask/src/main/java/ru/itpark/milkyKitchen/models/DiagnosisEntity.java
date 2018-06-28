@@ -56,5 +56,7 @@ public class DiagnosisEntity {
         this.id = id;
     }
 
-//    getFullName
+//    public setId() {
+//
+//    }
 }

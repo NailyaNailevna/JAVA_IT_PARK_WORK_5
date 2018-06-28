@@ -47,6 +47,7 @@ public class IssueProductEntity {
 //    private DistributeInfo distributeInfo;
 //    @Column(name = "distribute_info")
     private JsonBinaryType distributeInfo;
+//    private Issue distributeInfo;
 
     @Column(name ="user_id")
     private Integer userId;

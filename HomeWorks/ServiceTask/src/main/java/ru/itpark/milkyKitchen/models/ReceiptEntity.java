@@ -1,6 +1,8 @@
 package ru.itpark.milkyKitchen.models;
 
 import lombok.*;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
@@ -66,17 +68,14 @@ public class ReceiptEntity {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_position_id", nullable = false)
+    @NotFound(action= NotFoundAction.IGNORE)
     private EmployeePositionEntity emplPosId;
-//    @Column(name = "employee_position_id", nullable = false)
-//    private Integer emplPosId;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private IndividualEntity patientId;
 
     @Column(name = "sign_id")
-//    @Enumerated(value = EnumType.STRING)
-//    private ReceiptSignEnum receiptSign;
     private Integer signId;
 
     @Column(name = "cito", columnDefinition="boolean default false")

@@ -15,9 +15,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReceptDto {
+public class ReceiptDto {
     private Long id;
     private String series;
     private String num;
     private Date issueDt;
+    private Boolean canceled;
 }

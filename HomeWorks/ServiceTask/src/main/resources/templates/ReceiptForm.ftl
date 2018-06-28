@@ -8,48 +8,34 @@
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
-    <#--<script>-->
-        <#--function changeStatus(id, status_element) {-->
-            <#--$.ajax({-->
-                <#--type: "POST",-->
-                <#--url: "/receipts/" + id + "?action=change_status",-->
-                <#--success: function (response) {-->
-                    <#--status_element.innerHTML = response["state"];-->
-                <#--}-->
-            <#--});-->
-        <#--}-->
-    <#--</script>-->
+<#--
+    <script>
+        function changeStatus(id, status_element) {
+            $.ajax({
+            type: "POST",
+            url: "/receipts/" + id + "?action=change_status",
+            success: function (response) {
+            status_element.innerHTML = response["state"];
+            }
+            });
+        }
+    </script>
+-->
 </head>
 <body>
-<#--<h3>Рецепт</h3>-->
 <div class="form-style-9">
     <div>Рецепт</div>
-    <#--<fieldset>-->
-        <form name="receipt" action="/addReceipt" method="post">
+<#--<fieldset>-->
+    <form name="receipt" action="/addReceipt" method="post">
 
-    <#--<form action="/addReceipt" method="post">-->
-        <#--<select class="form-control" id="clinics" name="testOrder">-->
-        <#--<@spring.formSingleSelect path, options, attributes/>-->
-<#--        <select data-placeholder="Пункт ДМК" class="chosen-select" tabindex="2">
-            <#--<option value="">Select Test Order</option>-->
-    <#--            <option th:each="kitchen : ${kitchens}"
-                        th:value="${kitchen.id}"
-                        th:text="${kitchen.name}">
-                </option>
-            </select>
-    -->
-<#--</div>-->
-<#--<div>-->
-        <input id="typeId" name="typeId" type="text" value="5" readonly="readonly"/>
-        <input id="signId" name="signId" type="text" value="2" readonly="readonly"/>
-        <#--<input id="cito" name="cito" type="text" value="false" readonly="readonly"/>-->
+        <input id="typeId" name="typeId" type="hidden" value="5" readonly="readonly"/>
+        <input id="signId" name="signId" type="hidden" value="2" readonly="readonly"/>
 
-    <br>
+        <br>
         <label for="series">
             <span>Серия <span class="required">*</span></span>
             <input type="text" id="series" name="series" value=""/>
         </label>
-        <#--<input id="series" name="series" type="text"/>-->
 
         <label for="num">
             <span>Номер <span class="required">*</span></span>
@@ -58,9 +44,9 @@
 
         <label for="issueDt">
             <span>Дата выписки <span class="required">*</span></span>
-                <input id="issueDt" name="issueDt" type="date"/>
+            <input id="issueDt" name="issueDt" type="date"/>
         </label>
-    <br>
+        <br>
         <label for="beginDt">
             <span>Действует с <span class="required">*</span></span>
             <input id="beginDt" name="beginDt" type="date"/>
@@ -69,38 +55,31 @@
             <span>по <span class="required">*</span></span>
             <input id="endDt" name="endDt" type="date"/>
         </label>
-    <br>
+        <br>
         <label for="patient">
             <span>Пациент <span class="required">*</span></span>
-            <#--<input id="patientId" name="patientId" value="7455768" type="search">-->
         </label>
         <select id="patient" name="patientId"
-            onChange="document.OrderForm.TT.value=document.OrderForm.patientId.options[document.OrderForm.patientId.selectedIndex].text;">
-            <option selected></option>
+                onChange="document.OrderForm.TT.value=document.OrderForm.patientId.options[document.OrderForm.patientId.selectedIndex].text;">
+            <option selected disabled hidden style='display: none' value=''></option>
             <#list patients as patient>
                 <option value="${patient.id?c}">${patient.fio}</option>
             </#list>
         </select>
-        <#--$(".js-example-tags").select2({-->
-        <#--tags: true-->
-        <#--});-->
-    <br>
+        <br>
         <label for="birthDt">
             <span>Дата рождения <span class="required">*</span></span>
             <input id="birthDt" name="birthDt" type="date" value=""/>
-            <#--value="${patient.birthDate}"-->
         </label>
         <label for="age">
             <span>Возраст </span>
             <input id="age" name="age" type="text" readonly="readonly">
         </label>
-    <br>
+        <br>
         <label for="ageCategory">
             <span>Возрастная категория <span class="required">*</span></span>
-            <#--<input id="ageCategoryId" name="ageCategoryId" value="3" type="search" style="width:15%;">-->
             <select id="ageCategory" name="ageCategoryId" style="width:15%;"
-                    onChange="document.OrderForm.TT.value=document.OrderForm.ageCategoryId.options[document.OrderForm.ageCategoryId.selectedIndex].text;">
-                <option selected></option>
+                <option selected value=''></option>
                 <option value="1">Категория I</option>
                 <option value="2">Категория II</option>
                 <option value="3">Категория III</option>
@@ -108,10 +87,8 @@
         </label>
         <label for="benefitDefinition">
             <span>Код категории граждан <span class="required">*</span></span>
-            <#--<input id="benefitDefinitionId" name="benefitDefinitionId" type="search" value="73" style="width:30%">-->
-            <select id="benefitDefinition" name="benefitDefinitionId" style="width:30%;"
-                    onChange="document.OrderForm.TT.value=document.OrderForm.benefitDefinitionId.options[document.OrderForm.benefitDefinitionId.selectedIndex].text;">
-                <option selected></option>
+            <select id="benefitDefinition" name="benefitDefinitionId" style="width:30%;">
+                <option selected disabled hidden style='display: none' value=''></option>
                 <option value="73">По социальному положению</option>
                 <option value="74">По заболеванию</option>
             </select>
@@ -123,26 +100,27 @@
         <#--<input id="diagnosisId" name="diagnosisId" type="search" value="21431" style="width:30%">-->
         <select id="diagnosis" name="diagnosisId" style="width:89%;"
                 onChange="document.OrderForm.TT.value=document.OrderForm.diagnosisId.options[document.OrderForm.diagnosisId.selectedIndex].text;">
-            <option selected></option>
-            <#list diagnosis as diagnos>
-                <option value="${diagnos.id?c}">${diagnos.code}: ${diagnos.name}</option>
-            </#list>
+            <#--<option selected disabled value="null&c"></option>-->
+                <option selected value="-1"></option>
+        <#list diagnosis as diagnos>
+            <option value="${diagnos.id?c}">${diagnos.code}: ${diagnos.name}</option>
+        </#list>
         </select>
+
     <br>
         <label for="kitchen" style="width:84%;">
             <span>Пункт ДМК <span class="required">*</span></span>
-            <#--<input id="kitchenId" name="kitchenId" type="search" value="57704" style="width:30%">-->
         </label>
         <select id="kitchen" name="kitchenId"
                 onChange="document.OrderForm.TT.value=document.OrderForm.kitchenId.options[document.OrderForm.kitchenId.selectedIndex].text;">
-        <#list kitchens as kitchen>
-              <option value="${kitchen.id?c}">${kitchen.name}</option>
-        </#list>
+            <option selected disabled hidden style='display: none' value=''></option>
+            <#list kitchens as kitchen>
+                <option value="${kitchen.id?c}">${kitchen.name}</option>
+            </#list>
         </select>
-    <br>
+        <br>
         <label for="clinic">
             <span>МО <span class="required">*</span></span>
-            <#--<input id="orgId" name="orgId" type="text" value="490" readonly="readonly"/>-->
         </label>
         <select id="clinic" name="clinicId" style="width:35%;" disabled="disabled">
             <option value="490">Контрольная МО</option>
@@ -155,12 +133,12 @@
         <select id="employeePosition" style="width:35%;" disabled="disabled">
             <option value="8327">терапевт Башнев М.А.</option>
         </select>
-            <input id="employeePositionId" name="employeePositionId" type="text" value="8327" readonly="readonly" hidden="hidden"/>
-    <br>
+        <input id="employeePositionId" name="employeePositionId" type="text" value="8327" readonly="readonly" hidden="hidden"/>
+        <br>
         <input type="submit" value="Сохранить"/>
 
     </form>
-    <#--</fieldset>-->
+<#--</fieldset>-->
 
 </div>
 </body>
