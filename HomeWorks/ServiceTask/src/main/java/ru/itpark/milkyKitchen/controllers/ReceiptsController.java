@@ -92,13 +92,13 @@ public class ReceiptsController {
     private IssueProductService issuesService;
 
     @GetMapping("/receipts/{receipt-id}/issues")
-    @ResponseBody
-//    public String getProductsPage(ModelMap model) {
-    public ResponseEntity<List<IssueProductDto>>
-        getAllProducts(@PathVariable("receipt-id") Integer receiptId){
-//        ReceiptsController productService;
-        return ResponseEntity.ok(issuesService.getAllIssues());
+    public String getProductsPage(ModelMap model, @PathVariable("receipt-id") Integer receiptId) {
+        List<IssueProductDto> issues = issuesService.getAllIssuesByReceipt(receiptId);
+        model.addAttribute("issues",issues);
+        return "ProductJournal";
     }
+
+
 /*
     public ResponseEntity<BabyFoodReceiptDto> addIssue(ModelMap model,
                                                        @PathVariable("receipt-id") Integer receiptId, @RequestParam("action") String action){

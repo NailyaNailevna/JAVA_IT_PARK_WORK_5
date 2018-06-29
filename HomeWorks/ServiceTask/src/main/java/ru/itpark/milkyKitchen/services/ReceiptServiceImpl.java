@@ -134,7 +134,7 @@ public class ReceiptServiceImpl implements ReceiptService {
                 .build();
 
         receiptRepository.save(newReceipt);
-        ReceiptEntity breceptId = receiptRepository.findOneById(newReceipt.getId()).get();
+        ReceiptEntity breceptId = receiptRepository.findOneByIdO(newReceipt.getId()).get();
 
         DepartmentEntity depId = departmentRepository.findOneById(receipt.getKitchenId()).get();
 

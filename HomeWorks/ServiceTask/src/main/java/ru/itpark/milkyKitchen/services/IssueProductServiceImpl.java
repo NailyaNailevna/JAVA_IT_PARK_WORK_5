@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.itpark.milkyKitchen.dto.IssueProductDto;
 import ru.itpark.milkyKitchen.models.IssueProductEntity;
+import ru.itpark.milkyKitchen.models.ReceiptEntity;
 import ru.itpark.milkyKitchen.repositories.IssueProductRepository;
+import ru.itpark.milkyKitchen.repositories.ReceiptRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,27 @@ public class IssueProductServiceImpl implements IssueProductService{
             );
         }
         return productDtos;
+    }
+
+    @Autowired
+    ReceiptRepository receiptRepository;
+    @Autowired
+    private IssueProductService issueProductService;
+
+    public List<IssueProductDto> getAllIssuesByReceipt(Integer receiptId) {
+        ReceiptEntity receipt = receiptRepository.findOneById(receiptId);
+        List<IssueProductEntity> issues = issueProductRepository.getAllIssues(receiptId);
+
+        List<IssueProductDto> issueProductDtos = new ArrayList<>();
+        for (IssueProductEntity issueProductEntity : issues) {
+            issueProductDtos.add(IssueProductDto.builder()
+                    .id(issueProductEntity.getId())
+                    .receiptId(issueProductEntity.getReceiptId())
+                    .distributeDt(issueProductEntity.getDistributeDt())
+                    .distributeInfo(issueProductEntity.getDistributeInfo())
+                    .build());
+        }
+        return issueProductDtos;
     }
 /*
     public List<IssueProductEntity> findById(String id, String vol) {

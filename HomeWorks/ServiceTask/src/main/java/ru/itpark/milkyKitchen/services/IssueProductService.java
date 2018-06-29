@@ -10,7 +10,9 @@ import java.util.List;
 
 public interface IssueProductService {
     List<IssueProductDto> getAllIssues();
-//    (Integer receiptId)
+
+    List<IssueProductDto> getAllIssuesByReceipt(Integer receiptId);
+
 
 //    Integer addReceipt(IssueProductForm issueProductForm);
 //List<IssueProductEntity> findById(String id, String vol);

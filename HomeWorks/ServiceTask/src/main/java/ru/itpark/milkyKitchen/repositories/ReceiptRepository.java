@@ -19,6 +19,9 @@ public interface ReceiptRepository extends JpaRepository<ReceiptEntity,Integer>{
     List<ReceiptEntity> findById(Integer id);
 
     @Query(nativeQuery = true, value = "SELECT * FROM ehr.receipt r where r.id = ?1")
-    Optional<ReceiptEntity> findOneById(Integer id);
+    ReceiptEntity findOneById(Integer id);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM ehr.receipt r where r.id = ?1")
+    Optional<ReceiptEntity> findOneByIdO(Integer id);
 
 }

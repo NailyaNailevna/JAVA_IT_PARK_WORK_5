@@ -24,62 +24,37 @@
     <h3>Журнал отпущенной продукции</h3>
     <#--<a href="addReceipt">Создать Рецепт</a>-->
     <br><br>
+    <div class="box-header" style="padding: 10px 10px 0px 0px;">
+        <a href="/receipts">
+            <button class="form-style-9 input" style="padding: 4px 8px; margin: -2px;"><i
+                    class="fa fa-back"></i> К списку рецептов
+            </button>
+        </a>
+    </div>
+    <br><br>
     <div class="products">
         <table>
             <tr>
                 <th>
-                    Продукт
+                    Дата выдачи
                 </th>
                 <th>
-                    Дата 1
-                </th>
-                <th>
-                    Дата 2
-                </th>
-                <th>
-                    Дата 3
-                </th>
-                <th>
-                    Дата 4
-                </th>
-                <th>
-                    Дата 5
-                </th>
-                <th>
-                    Дата 6
+                    Информация о выдаче
                 </th>
                 <#--<th>-->
-                    <#--Врач-->
+                    <#--Дата 2-->
                 <#--</th>-->
             </tr>
-        <#list products as product>
-            <tr>
-                <td>
-                    <p id="receipt_id">${receipt.id}</p>
-                </td>
-                <td>
-                    ${receipt.series}
-                </td>
-                <td>
-                    <p id="num">${receipt.num}</p>
-                </td>
-                <td>
-                    ${receipt.patientFio}
-                </td>
-                <td>
-                    ${receipt.birthDate}
-                </td>
-                <#--<td>-->
-                    <#--${receipt.age}-->
-                <#--</td>-->
-                <td>
-                    ${receipt.kitchenName}
-                </td>
-                <td>
-                    ${receipt.emplPosName}
-                </td>
-            </tr>
-        </#list>
+            <#list issues as issue>
+                <tr>
+                    <td>
+                        <p id="issueDate">${issue.distributeDt}</p>
+                    </td>
+                    <td>
+                        <p id="distributeInfo">${issue.distributeInfo}</p>
+                    </td>
+                </tr>
+            </#list>
         </table>
     </div>
     </body>

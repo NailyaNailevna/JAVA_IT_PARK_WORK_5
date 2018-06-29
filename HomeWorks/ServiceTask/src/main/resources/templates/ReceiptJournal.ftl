@@ -82,66 +82,21 @@
                     ${receipt.emplPosName}
                 </td>
                 <td>
-                    <input type="button" value="Удалить" onclick="deleteReceipt(${receipt.id?c})"/>
+                    <input type="button" value="Удалить" onclick="deleteReceipt(${receipt.id?c})" class="form-style-9 input" style="padding: 4px 8px; margin: -2px;"/>
                 </td>
+                <#--<td>-->
+                    <#--<form action="/receipts/${receipt.id?c}/issues" method="get">-->
+                        <#--<input type="submit" value="Выдачи" class="form-style-9 input" style="padding: 4px 8px; margin: -2px;"/>-->
+                    <#--</form>-->
+                <#--</td>-->
             </tr>
         </#list>
         </table>
     </div>
-<#--
-    <br><br>
-    <div class="products">
-        <table>
-            <tr>
-                <th>
-                    Продукт
-                </th>
-                <th>
-                    Дата 1
-                </th>
-                <th>
-                    Дата 2
-                </th>
-                <th>
-                    Дата 3
-                </th>
-                <th>
-                    Дата 4
-                </th>
-                <th>
-                    Дата 5
-                </th>
-                <th>
-                    Дата 6
-                </th>
-            </tr>
-        <#list products as product>
-            <tr>
-                <td>
-                    <p id="receipt_id">${receipt.id}</p>
-                </td>
-                <td>
-                ${receipt.series}
-                </td>
-                <td>
-                    <p id="num">${receipt.num}</p>
-                </td>
-                <td>
-                ${receipt.patientFio}
-                </td>
-                <td>
-                ${receipt.birthDate}
-                </td>
-                <td>
-                ${receipt.kitchenName}
-                </td>
-                <td>
-                ${receipt.emplPosName}
-                </td>
-            </tr>
-        </#list>
-        </table>
-    </div>
-    -->
+
+    <#--<br><br>-->
+    <#--<class id="isuues_list">-->
+
+    <#--</class>-->
     </body>
 </html>
