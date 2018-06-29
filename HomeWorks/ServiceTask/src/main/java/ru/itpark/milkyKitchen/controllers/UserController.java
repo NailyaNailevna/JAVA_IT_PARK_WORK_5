@@ -16,4 +16,5 @@ public class UserController {
     public String getLoginPage() {
         return "LoginPage";
     }
+
 }

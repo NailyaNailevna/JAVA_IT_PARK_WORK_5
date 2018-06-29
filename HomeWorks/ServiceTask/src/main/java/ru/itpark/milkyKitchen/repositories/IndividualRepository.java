@@ -16,7 +16,7 @@ import java.util.Optional;
 //@Repository("ReceiptRepository")
 public interface IndividualRepository extends JpaRepository<IndividualEntity,Long>{
 
-    @Query(nativeQuery = true, value = "SELECT * FROM public.pim_individual i where i.birth_dt >= cast('01.06.2015' as date) order by birth_dt")
+    @Query(nativeQuery = true, value = "SELECT * FROM public.pim_individual i where i.birth_dt >= cast('01.06.2015' as date) and i.birth_dt <= cast(now() as date) order by birth_dt")
     List<IndividualEntity> findAll();
 
     @Query(nativeQuery = true, value = "SELECT i.id, i.surname || ' ' || i.name || ' ' || i.patr_name, i.birth_dt FROM public.pim_individual i where i.id = ?1")

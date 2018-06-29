@@ -26,7 +26,7 @@ public class UserDto {
         return UserDto.builder()
                 .id(model.getId())
                 .login(model.getLogin())
-                .blocked(model.isBlocked())
+//                .blocked(model.isBlocked())
                 .build();
     }
 

@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 
 
@@ -22,20 +22,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    private PasswordEncoder passwordEncoder() {
-        return new MessageDigestPasswordEncoder();
-
+    public PasswordEncoder passwordEncoder() {
+        return new Md5PasswordEncoder();
     }
 
     @Autowired
     UserDetailsService userDetailsService;
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return super.userDetailsService();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers(HttpMethod.GET, "/receipts")
                 .permitAll()
-            .antMatchers(HttpMethod.POST, "/reseipts")
+            .antMatchers(HttpMethod.POST, "/addReceipt")
                 .permitAll()
             .and()
                 .formLogin()

@@ -7,11 +7,12 @@
 </head>
 <body>
 <div class="form-style-9">
-    <form action="/login" method="post">
-        <input type="text" name="login" placeholder="Login" />
-        <input type="password" name="password" placeholder="Password" />
-        <input type="submit" value="SignIn"/>
-    </form>
+    <#--<form action="/login" method="post">-->
+        <#--<input type="text" name="login" placeholder="Login" >-->
+        <#--<input type="password" name="password" placeholder="Password"/>-->
+        <#--<input type="submit" value="SignIn"/>-->
+        'Hello'
+    <#--</form>-->
 </div>
 </body>
 </html>

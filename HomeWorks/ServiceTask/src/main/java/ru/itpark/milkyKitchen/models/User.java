@@ -30,4 +30,7 @@ public class User {
 
     @Column
     private boolean blocked;
+
+//    @ElementCollection
+//    private List<String> authorities;
 }

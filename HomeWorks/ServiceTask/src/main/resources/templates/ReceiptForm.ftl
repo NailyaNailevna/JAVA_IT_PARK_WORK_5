@@ -45,6 +45,9 @@
         <label for="issueDt">
             <span>Дата выписки <span class="required">*</span></span>
             <input id="issueDt" name="issueDt" type="date"/>
+            <script>
+                document.getElementById('issueDt').value = new Date().toISOString().substring(0, 10);
+            </script>
         </label>
         <br>
         <label for="beginDt">
@@ -63,13 +66,17 @@
                 onChange="document.OrderForm.TT.value=document.OrderForm.patientId.options[document.OrderForm.patientId.selectedIndex].text;">
             <option selected disabled hidden style='display: none' value=''></option>
             <#list patients as patient>
-                <option value="${patient.id?c}">${patient.fio}</option>
+                <option value="${patient.id?c}" birthDate="${patient.birthDate}">${patient.fio}</option>
             </#list>
         </select>
         <br>
         <label for="birthDt">
             <span>Дата рождения <span class="required">*</span></span>
             <input id="birthDt" name="birthDt" type="date" value=""/>
+            <#--<script>-->
+                <#--document.getElementById('beginDt').value = document.getElementById('patient').getAttribute("birthDate")-->
+                        <#--new Date().toISOString().substring(0, 10);-->
+            <#--</script>-->
         </label>
         <label for="age">
             <span>Возраст </span>

@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.itpark.milkyKitchen.models.User;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +22,11 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(User user) {
         this.login = user.getLogin();
         this.password = user.getPassword();
+        this.blocked = user.isBlocked();
+        this.authorities = new ArrayList<SimpleGrantedAuthority>();
+//        for (String stringAuthority : user.getAuthorities()) {
+//            this.authorities.add(new SimpleGrantedAuthority(stringAuthority));
+//        }
     }
 
     @Override
